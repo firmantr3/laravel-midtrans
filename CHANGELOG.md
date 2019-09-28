@@ -2,16 +2,20 @@
 
 All notable changes to `laravel-midtrans` will be documented in this file
 
-## Version 1.0
+## Version 1.0.3
 
-### Added
+* Added transaction methods.
 
-* Everything
+## Version 1.0.2
+
+* Fix config bug
 
 ## Version 1.0.1
 
 * Synchronize config on service boot, so you can directly use official classes.
 
-## Version 1.0.2
+## Version 1.0
 
-* Fix config bug
+### Added
+
+* Everything

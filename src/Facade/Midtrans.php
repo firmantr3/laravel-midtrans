@@ -41,10 +41,6 @@ class Midtrans extends Facade
             return $instance->$method($args[0]);
         }
 
-        if (count($args) === 2) {
-            return $instance->$method($args[0], $args[1]);
-        }
-
         return $instance->$method(...$args);
     }
 }

@@ -48,7 +48,7 @@ append this to your`.env` file:
 MIDTRANS_SERVER_KEY="My Midtrans Server Key"
 MIDTRANS_CLIENT_KEY="My Midtrans Client Kye"
 MIDTRANS_ENV=development
-MIDTRANS_SANITIZE=false
+MIDTRANS_SANITIZE=true
 MIDTRANS_3DS=false
 ```
 
@@ -287,6 +287,62 @@ else if ($transaction == 'cancel') {
 else if ($transaction == 'deny') {
       // TODO Set payment status in merchant's database to 'failure'
 }
+```
+
+### Process Transaction
+
+#### Get Transaction Status
+
+```php
+<?php
+
+use Firmantr3\Midtrans\Facade\Midtrans;
+
+// somewhere in your controller
+$status = Midtrans::status($orderId);
+var_dump($status);
+```
+
+#### Approve Transaction
+
+If transaction fraud_status == [CHALLENGE](https://support.midtrans.com/hc/en-us/articles/202710750-What-does-CHALLENGE-status-mean-What-should-I-do-if-there-is-a-CHALLENGE-transaction-), you can approve the transaction from Merchant Dashboard, or API :
+
+```php
+<?php
+
+use Firmantr3\Midtrans\Facade\Midtrans;
+
+// somewhere in your controller
+$approve = Midtrans::approve($orderId);
+var_dump($approve);
+```
+
+#### Cancel Transaction
+
+You can Cancel transaction with `fraud_status == CHALLENGE`, or credit card transaction with `transaction_status == CAPTURE` (before it become SETTLEMENT)
+
+```php
+<?php
+
+use Firmantr3\Midtrans\Facade\Midtrans;
+
+// somewhere in your controller
+$cancel = Midtrans::cancel($orderId);
+var_dump($cancel);
+```
+
+#### Expire Transaction
+
+You can Expire transaction with `transaction_status == PENDING` (before it become SETTLEMENT or EXPIRE)
+
+```php
+<?php
+
+use Firmantr3\Midtrans\Facade\Midtrans;
+
+// somewhere in your controller
+$cancel = Midtrans::cancel($orderId);
+var_dump($cancel);
 ```
 
 ## What is VT stands for
