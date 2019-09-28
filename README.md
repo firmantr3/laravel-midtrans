@@ -2,6 +2,11 @@
 
 [Midtrans-PHP](https://github.com/Midtrans/midtrans-php) library wrapped for laravel.
 
+## Features
+
+* Laravel 5.5/6 integration.
+* Facade for all midtrans services: Snap, VT-Direct. Easier usage and create mocking for tests.
+
 ## Installation
 
 ```bash
@@ -35,8 +40,7 @@ If you want to use the facade, add this to your facades in `/config/app.php`:
 
 ## Usage
 
-Use provided facade `Firmantr3\Midtrans\Facade\Midtrans` to call
-all available midtrans api.
+Use provided facade `Firmantr3\Midtrans\Facade\Midtrans::snapOrVtDirectMethods()` or `app('midtrans')->snapOrVtDirectMethods()`, but you can just use the official class as well.
 
 Official documentation can be found [here](https://github.com/Midtrans/midtrans-php)
 
@@ -270,6 +274,25 @@ else if ($transaction == 'deny') {
 In case if you curious VT, the answer: `Midtrans` previous name is `Veritrans` ;).
 
 ## Test
+
+### Mocking Midtrans Example
+
+```php
+<?php
+
+use Firmantr3\Midtrans\Facade\Midtrans;
+
+Midtrans::shouldReceive('createSnapToken')
+    ->once()
+    ->with(['parameters'])
+    ->andReturn('My Token');
+
+$myToken = Midtrans::createSnapToken(['parameters'])); // returns "My Token"
+```
+
+Official laravel documentation: [https://laravel.com/docs/5.8/mocking#mocking-facades](https://laravel.com/docs/5.8/mocking#mocking-facades)
+
+### Running Tests
 
 ```bash
 vendor/bin/phpunit
