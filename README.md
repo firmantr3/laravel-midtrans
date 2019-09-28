@@ -13,12 +13,6 @@
 composer require firmantr3/laravel-midtrans
 ```
 
-Publish migration by running artisan `vendor:publish`:
-
-```bash
-php artisan vendor:publish --provider=Firmantr3\\Midtrans\\Providers\\MidtransServiceProvider
-```
-
 ### Laravel <= 5.4
 
 Append this to Providers section array on your `config/app.php` like so:
@@ -36,6 +30,14 @@ return [
 ### Laravel 5.5+ / 6
 
 Automatically added by package discovery.
+
+### Publish Config
+
+Publish migration by running artisan `vendor:publish`:
+
+```bash
+php artisan vendor:publish --provider=Firmantr3\\Midtrans\\Providers\\MidtransServiceProvider
+```
 
 ## Configuration
 
@@ -289,7 +291,7 @@ else if ($transaction == 'deny') {
 
 ## What is VT stands for
 
-In case if you curious VT, the answer: `Midtrans` previous name is `Veritrans` ;).
+In case if you curious what is VT like me, the answer: `Midtrans` previous name is `Veritrans` ;).
 
 ## Test
 
@@ -300,12 +302,12 @@ In case if you curious VT, the answer: `Midtrans` previous name is `Veritrans` ;
 
 use Firmantr3\Midtrans\Facade\Midtrans;
 
-Midtrans::shouldReceive('createSnapToken')
+Midtrans::shouldReceive('getSnapToken')
     ->once()
     ->with(['parameters'])
     ->andReturn('My Token');
 
-$myToken = Midtrans::createSnapToken(['parameters'])); // returns "My Token"
+$myToken = Midtrans::getSnapToken(['parameters'])); // returns "My Token"
 ```
 
 Official laravel documentation: [https://laravel.com/docs/5.8/mocking#mocking-facades](https://laravel.com/docs/5.8/mocking#mocking-facades)
