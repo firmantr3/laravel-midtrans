@@ -29,7 +29,8 @@ class Midtrans {
         Config::$isSanitized = config('midtrans.sanitize') == 'true';
         Config::$is3ds = config('midtrans.3ds') == 'true';
         Config::$curlOptions = config('midtrans.curl_options');
-        Config::$isProduction = config('midtrans.env') == 'production';
+        $configEnv = config('midtrans.env');
+        Config::$isProduction = ($configEnv === '' ? app()->environment() : $configEnv) == 'production';
     }
 
     /**
