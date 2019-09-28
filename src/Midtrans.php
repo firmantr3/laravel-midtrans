@@ -7,6 +7,7 @@ use Midtrans\Snap;
 use Midtrans\Config;
 use Midtrans\CoreApi;
 use Midtrans\Notification;
+use Midtrans\Transaction;
 
 class Midtrans {
 
@@ -74,6 +75,80 @@ class Midtrans {
     public function capture($param)
     {
         return CoreApi::capture($param);
+    }
+
+    /**
+     * Retrieve transaction status
+     * 
+     * @param string $id Order ID or transaction ID
+     * 
+     * @return mixed[]
+     */
+    public function status($id) {
+        return Transaction::status($id);
+    }
+
+    /**
+     * Approve challenge transaction
+     * 
+     * @param string $id Order ID or transaction ID
+     * 
+     * @return string
+     */
+    public function approve($id)
+    {
+        return Transaction::approve($id);
+    }
+
+    /**
+     * Cancel transaction before it's settled
+     * 
+     * @param string $id Order ID or transaction ID
+     * 
+     * @return string
+     */
+    public function cancel($id)
+    {
+        return Transaction::cancel($id);
+    }
+
+    /**
+     * Expire transaction before it's setteled
+     * 
+     * @param string $id Order ID or transaction ID
+     * 
+     * @return mixed[]
+     */
+    public function expire($id)
+    {
+        return Transaction::expire($id);
+    }
+
+    /**
+     * Transaction status can be updated into refund
+     * if the customer decides to cancel completed/settlement payment.
+     * The same refund id cannot be reused again.
+     * 
+     * @param string $id Order ID or transaction ID
+     * 
+     * @return mixed[]
+     */
+    public function refund($id)
+    {
+        return Transaction::refund($id);
+    }
+
+    /**
+     * Deny method can be triggered to immediately deny card payment transaction
+     * in which fraud_status is challenge.
+     * 
+     * @param string $id Order ID or transaction ID
+     * 
+     * @return mixed[]
+     */
+    public function deny($id)
+    {
+        return Transaction::deny($id);
     }
 
     /**
