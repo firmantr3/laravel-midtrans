@@ -4,7 +4,7 @@
 
 ## Features
 
-* Laravel 5.5/6 integration.
+* Laravel 5/6 integration.
 * Facade for all midtrans services: Snap, VT-Direct. Easier usage and create mocking for tests.
 
 ## Installation
@@ -16,8 +16,26 @@ composer require firmantr3/laravel-midtrans
 Publish migration by running artisan `vendor:publish`:
 
 ```bash
-php artisan vendor:publish
+php artisan vendor:publish --provider=Firmantr3\\Midtrans\\Providers\\MidtransServiceProvider
 ```
+
+### Laravel <= 5.4
+
+Append this to Providers section array on your `config/app.php` like so:
+
+```php
+<?php
+return [
+    'providers': [
+        // Other Providers above
+        Firmantr3\Midtrans\Providers\MidtransServiceProvider::class,
+    ],
+];
+```
+
+### Laravel 5.5+ / 6
+
+Automatically added by package discovery.
 
 ## Configuration
 
