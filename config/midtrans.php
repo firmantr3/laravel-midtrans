@@ -8,7 +8,7 @@ return [
 
     'env' => env('MIDTRANS_ENV', app()->environment()),
 
-    'sanitize' => env('MIDTRANS_SANITIZE', 'false'),
+    'sanitize' => env('MIDTRANS_SANITIZE', 'true'),
 
     '3ds' => env('MIDTRANS_3DS', 'false'),
 

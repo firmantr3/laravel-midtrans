@@ -15,7 +15,7 @@ class Midtrans {
      */
     public function __construct()
     {
-        $this->registerMidtransConfig();
+        self::registerMidtransConfig();
     }
 
     /**
@@ -23,7 +23,7 @@ class Midtrans {
      *
      * @return void
      */
-    public function registerMidtransConfig() {
+    public static function registerMidtransConfig() {
         Config::$serverKey = config('midtrans.server_key');
         Config::$clientKey = config('midtrans.client_key');
         Config::$isSanitized = config('midtrans.sanitize') == 'true';

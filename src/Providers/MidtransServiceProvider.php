@@ -20,6 +20,8 @@ class MidtransServiceProvider extends ServiceProvider {
         $this->app->singleton('midtrans', function ($app) {
             return new Midtrans;
         });
+
+        Midtrans::registerMidtransConfig();
     }
 
     public function register() {
