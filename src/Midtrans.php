@@ -6,8 +6,8 @@ use Exception;
 use Midtrans\Snap;
 use Midtrans\Config;
 use Midtrans\CoreApi;
-use Midtrans\Notification;
 use Midtrans\Transaction;
+use Firmantr3\Midtrans\Notification;
 
 class Midtrans {
 
@@ -149,6 +149,16 @@ class Midtrans {
     public function deny($id)
     {
         return Transaction::deny($id);
+    }
+
+    /**
+     * Read data from input source
+     *
+     * @param string $input_source
+     * @return string
+     */
+    public function input($input_source) {
+        return file_get_contents($input_source);
     }
 
     /**

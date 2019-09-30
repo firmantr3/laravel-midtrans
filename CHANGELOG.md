@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-midtrans` will be documented in this file
 
+## Version 1.0.4
+
+* Refactor notification to be more testable (see `tests/NotificationTest.php`).
+
 ## Version 1.0.3
 
 * Added transaction methods.
