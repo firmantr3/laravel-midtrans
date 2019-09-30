@@ -2,9 +2,9 @@
 
 namespace Firmantr3\Midtrans\Test;
 
-use Firmantr3\Midtrans\Facade\Midtrans;
-use Midtrans\Notification;
 use Midtrans\VT_Tests;
+use Firmantr3\Midtrans\Notification;
+use Firmantr3\Midtrans\Facade\Midtrans;
 
 class NotificationTest extends TestCase
 {
@@ -39,5 +39,53 @@ class NotificationTest extends TestCase
         $this->assertEquals($notif->gross_amount, "2700");
 
         unlink($tmpfname);
+    }
+
+    public function testCanWorkWithMockedJSON()
+    {
+        // mock input source
+        Midtrans::shouldReceive('input')
+            ->with('php://input')
+            ->andReturn('{
+                "status_code" : "200",
+                "status_message" : "Midtrans payment notification",
+                "transaction_id" : "My Transaction Id",
+                "order_id" : "My Order Id",
+                "payment_type" : "credit_card",
+                "transaction_time" : "2014-04-07 16:22:36",
+                "transaction_status" : "capture",
+                "fraud_status" : "accept",
+                "masked_card" : "411111-1111",
+                "gross_amount" : "9999"
+            }');
+
+        // mock midtrans transaction status
+        Midtrans::shouldReceive('status')
+            ->once()
+            ->with('My Transaction Id')
+            ->andReturn((object) [
+                "status_code" => "200",
+                "status_message" => "Midtrans payment notification",
+                "transaction_id" => "My Transaction Id",
+                "order_id" => "My Order Id",
+                "payment_type" => "credit_card",
+                "transaction_time" => "2014-04-07 16:22:36",
+                "transaction_status" => "capture",
+                "fraud_status" => "accept",
+                "masked_card" => "411111-1111",
+                "gross_amount" => "9999",
+            ]);
+        
+        // make mock partial so unmocked methods can still be accessed
+        Midtrans::makePartial();
+
+        $notif = Midtrans::notification();
+
+        $this->assertTrue($notif instanceof Notification);
+
+        $this->assertEquals($notif->transaction_status, "capture");
+        $this->assertEquals($notif->payment_type, "credit_card");
+        $this->assertEquals($notif->order_id, "My Order Id");
+        $this->assertEquals($notif->gross_amount, "9999");
     }
 }
