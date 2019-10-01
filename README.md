@@ -368,6 +368,11 @@ $myToken = Midtrans::getSnapToken(['parameters'])); // returns "My Token"
 
 Official laravel documentation: [https://laravel.com/docs/5.8/mocking#mocking-facades](https://laravel.com/docs/5.8/mocking#mocking-facades)
 
+### Better Autocomplete
+
+If you need better facade autocomplete for your IDE, you can install this good package by Barry:
+[Laravel IDE Helper Generator](https://github.com/barryvdh/laravel-ide-helper)
+
 ### Running Tests
 
 ```bash
