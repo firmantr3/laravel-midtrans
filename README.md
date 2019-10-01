@@ -262,6 +262,10 @@ use Firmantr3\Midtrans\Facade\Midtrans;
 // somewhere in your controller
 
 $notification = Midtrans::notification();
+/**
+* $notificationArray = $notification->toArray();
+* $notificationObject = $notification->toObject();
+**/
 
 $transaction = $notification->transaction_status;
 $fraud = $notification->fraud_status;

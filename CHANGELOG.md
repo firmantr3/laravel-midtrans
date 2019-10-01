@@ -2,7 +2,11 @@
 
 All notable changes to `laravel-midtrans` will be documented in this file
 
-## Version 1.0.5
+## Version 1.0.7
+
+* Add method to get notification response object and convert it as array.
+
+## Version 1.0.6
 
 * Add methods from [Veritrans-Laravel5](https://github.com/harrypujianto/Veritrans-Laravel5).
 
