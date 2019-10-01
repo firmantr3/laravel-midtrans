@@ -102,5 +102,19 @@ class NotificationTest extends TestCase
         $this->assertEquals($notif->toArray()['payment_type'], "credit_card");
         $this->assertEquals($notif->toArray()['order_id'], "My Order Id");
         $this->assertEquals($notif->toArray()['gross_amount'], "9999");
+
+        $notif->onCapture(function($notif) {
+            NotificationState::$transactionStatusCaptureCallbackDone = true;
+
+            $notif->onFraudStatus('accept', function($notif) {
+                NotificationState::$fraudStatusAcceptCallbackDone = true;
+            });
+        })
+        ->onSuccess(function($notif) {
+            NotificationState::$transactionStatusSuccessCallbackDone = true;
+        });
+        $this->assertTrue(NotificationState::$transactionStatusCaptureCallbackDone);
+        $this->assertTrue(NotificationState::$fraudStatusAcceptCallbackDone);
+        $this->assertFalse(NotificationState::$transactionStatusSuccessCallbackDone);
     }
 }
