@@ -68,6 +68,26 @@ class Midtrans {
     }
 
     /**
+     * charge alias, but returns redirect url attribute
+     *
+     * @param array $payloads
+     */
+	public function vtweb_charge($params)
+	{	
+		return $this->charge($params)->redirect_url;
+	}
+
+    /**
+     * Charge alias
+     *
+     * @param array $params
+     */
+	public function vtdirect_charge($params)
+	{
+        return $this->charge($params);
+	}
+
+    /**
      * Capture pre-authorized transaction
      *
      * @param string $param Order ID or transaction ID, that you want to capture

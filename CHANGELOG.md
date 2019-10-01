@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-midtrans` will be documented in this file
 
+## Version 1.0.5
+
+* Add methods from [Veritrans-Laravel5](https://github.com/harrypujianto/Veritrans-Laravel5).
+
 ## Version 1.0.4
 
 * Refactor notification to be more testable (see `tests/NotificationTest.php`).
