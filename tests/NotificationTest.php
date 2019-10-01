@@ -87,5 +87,20 @@ class NotificationTest extends TestCase
         $this->assertEquals($notif->payment_type, "credit_card");
         $this->assertEquals($notif->order_id, "My Order Id");
         $this->assertEquals($notif->gross_amount, "9999");
+
+        $this->assertIsArray($notif->all());
+        $this->assertIsArray($notif->toArray());
+        $this->assertIsObject($notif->getResponse());
+        $this->assertIsObject($notif->toObject());
+
+        $this->assertEquals($notif->toObject()->transaction_status, "capture");
+        $this->assertEquals($notif->toObject()->payment_type, "credit_card");
+        $this->assertEquals($notif->toObject()->order_id, "My Order Id");
+        $this->assertEquals($notif->toObject()->gross_amount, "9999");
+
+        $this->assertEquals($notif->toArray()['transaction_status'], "capture");
+        $this->assertEquals($notif->toArray()['payment_type'], "credit_card");
+        $this->assertEquals($notif->toArray()['order_id'], "My Order Id");
+        $this->assertEquals($notif->toArray()['gross_amount'], "9999");
     }
 }

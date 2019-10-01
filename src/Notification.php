@@ -35,4 +35,41 @@ class Notification
             return $this->response->$name;
         }
     }
+
+    /**
+     * Get the value of response
+     * 
+     * @return object
+     */ 
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * alias of getResponse
+     *
+     * @return object
+     */
+    public function toObject() {
+        return $this->getResponse();
+    }
+
+    /**
+     * Get response in array
+     *
+     * @return array
+     */
+    public function toArray() {
+        return (array) $this->response;
+    }
+
+    /**
+     * toArray alias
+     *
+     * @return array
+     */
+    public function all() {
+        return $this->toArray();
+    }
 }
