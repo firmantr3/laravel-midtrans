@@ -40,8 +40,16 @@ class Notification
 
     public function __construct($input_source = "php://input")
     {
-        $raw_notification = json_decode(Midtrans::input($input_source), true);
-        $status_response = Midtrans::status($raw_notification['transaction_id']);
+        $raw_notification = optional(json_decode(Midtrans::input($input_source), true));
+        
+        $transactionId = $raw_notification['transaction_id'] ?: $raw_notification['order_id'];
+        
+        if(!$transactionId) {
+            $this->response = null;
+            return;
+        }
+        
+        $status_response = Midtrans::status($transactionId);
         $this->response = $status_response;
     }
 
